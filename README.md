@@ -2,4 +2,4 @@
 
 ## Exercise 0
 
-- [Practice makes Perfect](http://github.com/pseudocodenerd/e-lite-section-2/ex0)
+- [Practice makes Perfect](https://github.com/pseudocodenerd/e-lite-section-2/tree/master/ex0)
