@@ -6,7 +6,7 @@
 let nc
 let nr
 let grid
-let res = 10
+let res = 20
 
 // function to count the neighbors of a cell
 function ncount(grid, xc, yc) {
@@ -41,14 +41,14 @@ function setup() {
 }
 
 function draw() {
-    background("#333333");
+    background("#f1f1f1");
     for (let i = 0; i < nc; i++) {
         for (let j = 0; j < nr; j++) {
             let xc = i * res;
             let yc = j * res;
             if (grid[i][j] == 1) {
-                fill("f1f1f1");
-                stroke("#333");
+                fill("#333333");
+                stroke("#ffffff");
                 // -1 to give cell better shape
                 rect(xc, yc, res - 1, res - 1);
             }
