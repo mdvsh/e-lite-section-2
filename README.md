@@ -11,3 +11,7 @@
 ## Exercise 2
 
 - [Numbers API](https://ex2.vercel.app)
+
+## Exercise 3
+- [Conway's Game of Life | p5js](https://ex3-delta.vercel.app)
+  

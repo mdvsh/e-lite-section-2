@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of Life</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            background-color: white;
+            font-family: "Share Tech Mono", monospace;
+            font-style: normal;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        p,
+        ol {
+            font-size: 25px;
+            color: #333333;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <!-- <script src="j.js"></script> -->
+    <script src="sketch.js"></script>
+</head>
+
+<body>
+    <div class="hero">
+        <h1 style="font-size: 40px;">ex3: Conway's Game of Life </h1><br>
+        <center>    <div id="sketch" style="padding: 10px"></div>
+        </center>
+    
+    
+        <p style="font-size: 25px;">
+            <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" style="text-decoration: none;">The Game of
+                Life</a>, also known simply as Life, is a cellular automaton devised by the British mathematician John
+            Horton Conway in 1970.
+        </p>
+        <p>The universe of the Game of Life is an infinite, two-dimensional orthogonal grid of square cells, each of
+            which is in one of <u>two possible states, <i>living or dead </i></u>.</p>
+        <p>Whether a cell is dead or alive <u>depends on the cell's eight neighbours. </u></p>
+        <p>Every turn, cells live, die or are "born" based on these rules:</p>
+        <ol>Any live cell with fewer than two live neighbors dies, as if by underpopulation.</ol>
+        <ol>Any live cell with two or three live neighbors lives on to the next generation.</ol>
+        <ol>Any live cell with more than three live neighbors dies, as if by overpopulation.</ol>
+        <ol>Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</ol>
+    </div>
+</body>
+
+</html>
