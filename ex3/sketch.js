@@ -6,7 +6,10 @@
 let nc
 let nr
 let grid
-let res = 20
+var key
+var rkey
+// var foo
+let res = 10
 
 // function to count the neighbors of a cell
 function ncount(grid, xc, yc) {
@@ -22,11 +25,31 @@ function ncount(grid, xc, yc) {
     return c;
 }
 
+function create_grid() {
+    background("#f1f1f1")
+    for (let i = 0; i < nc; i++) {
+        for (let j = 0; j < nr; j++) {
+            let xc = i * res;
+            let yc = j * res;
+            if (grid[i][j] == 1) {
+                fill("#333333")
+                stroke("alicewhite")
+            } else {
+                fill("#f1f1f1")
+            }
+            rect(xc, yc, res - 1, res - 1);
+        }
+    }
+}
+
 function setup() {
     var canvas = createCanvas(1400, 600);
     canvas.parent('sketch')
-    nc = width / res;
-    nr = height / res;
+    key = false
+    rkey = false
+    foo = false
+    nc = width / res
+    nr = height / res
     grid = new Array(nc)
     // create grid
     for (let i = 0; i < grid.length; i++) {
@@ -35,53 +58,45 @@ function setup() {
     // put cells in the grid
     for (let i = 0; i < nc; i++) {
         for (let j = 0; j < nr; j++) {
-            grid[i][j] = floor(random(2));
+            grid[i][j] = floor(random(2))
         }
     }
 }
 
 function draw() {
-    background("#f1f1f1");
-    for (let i = 0; i < nc; i++) {
-        for (let j = 0; j < nr; j++) {
-            let xc = i * res;
-            let yc = j * res;
-            if (grid[i][j] == 1) {
-                fill("#333333");
-                stroke("#ffffff");
-                // -1 to give cell better shape
-                rect(xc, yc, res - 1, res - 1);
+
+    if (key == false) {
+        create_grid()
+        // foo = true
+    } else {
+        create_grid()
+        // Create a new state dict
+        let next_gen = new Array(nc)
+        for (let i = 0; i < next_gen.length; i++) {
+            next_gen[i] = new Array(nr)
+        }
+        // Compute next_gen based on grid
+        for (let i = 0; i < nc; i++) {
+            for (let j = 0; j < nr; j++) {
+                let alive = grid[i][j]
+                // Count live neighbors!
+                let neighbors = ncount(grid, i, j)
+
+                // Condition to reproduce | 1 is alive, 0 is dead.
+                if (alive == 0 && neighbors == 3) {
+                    next_gen[i][j] = 1
+                }
+                // die from under/overpopulation
+                else if (alive == 1 && (neighbors > 3 || neighbors < 2)) {
+                    next_gen[i][j] = 0
+                } else {
+                    next_gen[i][j] = alive;
+                }
+
             }
         }
+        // Change current state
+        grid = next_gen
     }
-
-    // Create a new state dict
-    let next_gen = new Array(nc)
-    for (let i = 0; i < next_gen.length; i++) {
-        next_gen[i] = new Array(nr)
-    }
-    // Compute next_gen based on grid
-    for (let i = 0; i < nc; i++) {
-        for (let j = 0; j < nr; j++) {
-            let alive = grid[i][j];
-            // Count live neighbors!
-            let neighbors = ncount(grid, i, j)
-
-            // Condition to reproduce | 1 is alive, 0 is dead.
-            if (alive == 0 && neighbors == 3) {
-                next_gen[i][j] = 1
-            }
-            // die from under/overpopulation
-            else if (alive == 1 && (neighbors > 3 || neighbors < 2)) {
-                next_gen[i][j] = 0
-            } else {
-                next_gen[i][j] = alive;
-            }
-
-        }
-    }
-    // Change current state
-    grid = next_gen
 }
 
-// work on CLASSifying Cell and Grid.
