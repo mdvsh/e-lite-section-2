@@ -8,13 +8,13 @@ const sec_sel = document.querySelector("select#section")
 const form = document.querySelector("form")
 
 const sec_num = {
-    "VI": 10,
-    "VII": 10,
-    "VIII": 10,
-    "IX": 15,
-    "X": 10,
-    "XI": 24,
-    "XII": 25
+    VI: 10,
+    VII: 10,
+    VIII: 10,
+    IX: 15,
+    X: 10,
+    XI: 24,
+    XII: 25
 }
 
 function get_sec_list(n) {
@@ -47,16 +47,24 @@ class_sel.addEventListener("change", event => {
 
 
 // Validation
-function validate(name, email) {
+function validate(name, email, clss, sec) {
     const rkpRegex = /^[r|e|v]\d{4,8}.+@dpsrkp.net$/
     const isValidName = (name != "")
     const isValidMail = rkpRegex.test(email)
-    let validated = isValidMail && isValidName
+    const isValidClass = Object.keys(sec_num).includes(clss)
+    const isValidSec = get_sec_list(sec_num[clss]).includes(sec)
+    let validated = isValidMail && isValidName && isValidClass && isValidSec
     if (!isValidMail) {
         alert("Please enter your valid student email-id")
     }
     if (!isValidName) {
         alert("Name cannot be empty. Please try again.")
+    }
+    if (!isValidClass) {
+        alert("Invalid Class. Please try again.")
+    }
+    if (!isValidSec) {
+        alert("Invalid Secion. Please try again.")
     }
     if (validated) {
         alert(`Hello, ${name} <${email}> from ${class_sel.value}-${sec_sel.value}.`)
@@ -66,7 +74,7 @@ function validate(name, email) {
 
 function submit_form(event) {
     event.preventDefault()
-    validate(name_inp.value, email_inp.value)
+    validate(name_inp.value, email_inp.value, class_sel.value, sec_sel.value)
 }
 
 form.addEventListener("submit", submit_form)
