@@ -1,12 +1,13 @@
 // Made with p5js. Initial video by Daniel Shiffman.
-// ToDo: color neighbors and parents based on history, change speed of simulation with buttons, use mouse to put cells on canvas
+// ToDo: make responsive canvas, color neighbors and parents based on history, 
+// change speed of simulation with buttons, use mouse to put cells on canvas
 
 // Global Variables. Change size of the cell by changing res.
 
 let nc
 let nr
 let grid
-let res = 20
+let res = 10
 let rkeyp, ckeyp, foo
 foo = false
 
