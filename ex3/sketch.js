@@ -1,15 +1,14 @@
 // Made with p5js. Initial video by Daniel Shiffman.
-// ToDo: OOP, color neighbors and parents based on history, change speed of simulation buttons, use mouse to put cells on canvas
+// ToDo: color neighbors and parents based on history, change speed of simulation with buttons, use mouse to put cells on canvas
 
 // Global Variables. Change size of the cell by changing res.
 
 let nc
 let nr
 let grid
-var key
-var rkey
-// var foo
-let res = 10
+let res = 20
+let rkeyp, ckeyp, foo
+foo = false
 
 // function to count the neighbors of a cell
 function ncount(grid, xc, yc) {
@@ -45,11 +44,12 @@ function create_grid() {
 function setup() {
     var canvas = createCanvas(1400, 600);
     canvas.parent('sketch')
-    key = false
-    rkey = false
-    foo = false
+    rkeyp = false
+    ckeyp = false
+    pkeyp = false
     nc = width / res
     nr = height / res
+
     grid = new Array(nc)
     // create grid
     for (let i = 0; i < grid.length; i++) {
@@ -58,17 +58,27 @@ function setup() {
     // put cells in the grid
     for (let i = 0; i < nc; i++) {
         for (let j = 0; j < nr; j++) {
-            grid[i][j] = floor(random(2))
+            grid[i][j] = 0
         }
     }
 }
 
 function draw() {
-
-    if (key == false) {
+    if (ckeyp == true && pkeyp == false) {
+        console.log(ckeyp)
         create_grid()
-        // foo = true
-    } else {
+        ckeyp = false
+        console.log(ckeyp)
+    } else if (rkeyp == true && pkeyp == false) {
+        console.log(grid[0][0])
+        for (let i = 0; i < nc; i++) {
+            for (let j = 0; j < nr; j++) {
+                grid[i][j] = floor(random(2))
+            }
+        }
+        create_grid()
+        rkeyp = false
+    } else if (pkeyp) {
         create_grid()
         // Create a new state dict
         let next_gen = new Array(nc)
@@ -92,7 +102,6 @@ function draw() {
                 } else {
                     next_gen[i][j] = alive;
                 }
-
             }
         }
         // Change current state
@@ -100,3 +109,29 @@ function draw() {
     }
 }
 
+function keyTyped() {
+    // Clear Board
+    if (key === 'c') {
+        for (let i = 0; i < nc; i++) {
+            for (let j = 0; j < nr; j++) {
+                grid[i][j] = 0
+            }
+        }
+        ckeyp = true
+    }
+    // Randomise Cell States
+    if (key === 'r' && !ckeyp) {
+
+        rkeyp = true
+    }
+    // Play/Pause
+    if (key === 'p') {
+        if (foo === false) {
+            pkeyp = true
+            foo = true
+        } else {
+            pkeyp = false
+            foo = false
+        }
+    }
+}
