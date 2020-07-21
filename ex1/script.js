@@ -29,6 +29,7 @@ function get_sec_list(n) {
 // Dependent section dropdown on selected class
 
 class_sel.addEventListener("change", event => {
+    sec_sel.innerHTML = `<option key="" selected>Select a section</option>`
     if (event.target.value) {
         // console.log(1)
         sec_sel.disabled = false
